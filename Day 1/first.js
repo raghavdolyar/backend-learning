@@ -1,11 +1,11 @@
 let data = "writing in the file\nhurray!";
 
-const fs = require("fs");
+const fs = require('fs');
 
-fs.writeFile("output.txt", data, (error) => {
+fs.writeFile('output.txt', data, (error) => {
   if (error) {
-    console.log("some error occured");
+    console.log('some error occured');
   } else {
-    console.log("file written successfully");
+    console.log('file written successfully');
   }
 });
