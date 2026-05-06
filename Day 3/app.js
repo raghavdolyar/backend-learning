@@ -10,8 +10,7 @@ const server = http.createServer((req, res) => {
 		}),
 	);
 	res.end();
-	// process.exit();
-	// stops event loop when server hears its 1st request
+	process.exit(); // stops event loop when server hears its 1st request
 });
 
 const PORT = 3000;
