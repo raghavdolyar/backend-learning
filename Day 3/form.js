@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 
 const server = http.createServer((req, res) => {
-	console.log(req.url, req.method, req.headers);
+	console.log(req.url, req.method);
 	res.setHeader('Content-Type', 'text-html');
 	if (req.url === '/') {
 		res.write('<html>');
@@ -12,10 +12,12 @@ const server = http.createServer((req, res) => {
 		res.write('<form action="/submit-details" method="POST">');
 		res.write('<label for="username">Enter your name : </label>');
 		res.write(
-			'<input type="text" id="username" name="username" placeholder="Enter your Username"><br>',
+			'<input type="text" id="username" name="username" placeholder="Enter your Username" required><br>',
 		);
 		res.write('<label for="gender">Gender:</label>');
-		res.write('<input type="radio" id="male" name="gender" value="male">');
+		res.write(
+			'<input type="radio" id="male" name="gender" value="male" required>',
+		);
 		res.write('<label for="male">Male</label>');
 		res.write(
 			'<input type="radio" id="female" name="gender" value="female">',
@@ -29,7 +31,21 @@ const server = http.createServer((req, res) => {
 		req.method === 'POST' &&
 		req.url.toLowerCase() === '/submit-details'
 	) {
-		fs.writeFileSync('user.txt', 'Node JS');
+		const body = [];
+		req.on('data', chunk => {
+			console.log(chunk);
+			body.push(chunk);
+		});
+		req.on('end', () => {
+			const parsedBody = Buffer.concat(body).toString();
+			const params = new URLSearchParams(parsedBody);
+			// const bodyObject = {};
+			// for (const [key, value] of params.entries()) {
+			// 	bodyObject[key] = value;
+			// }
+			const bodyObject = Object.fromEntries(params); // JS Object
+			fs.writeFileSync('user.txt', JSON.stringify(bodyObject));
+		});
 		res.statusCode = 302; // redirection
 		res.setHeader('Location', '/'); // redirects to Home Page
 	} else {
