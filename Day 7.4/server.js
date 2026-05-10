@@ -11,6 +11,9 @@ const rootPath = require('./utils/path-util');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 // granting access to public folder
 app.use(express.static(path.join(rootPath, 'public')));
 
@@ -25,8 +28,7 @@ app.use(userRouter);
 app.use('/host', hostRouter);
 
 app.use((req, res, next) => {
-	res.status(404);
-	res.sendFile(path.join(rootPath, 'views/404.html'));
+	res.status(404).render('404', { pageTitle: '404 — Page Not Found' });
 });
 
 const PORT = 3000;

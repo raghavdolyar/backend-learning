@@ -1,0 +1,28 @@
+<%- include('./partials/head') %>
+
+<body class="bg-[#111114] min-h-screen flex flex-col items-center px-4 py-12">
+  <header class="mb-8 text-center">
+    <h2 class="text-4xl font-semibold text-white tracking-tight">
+      Welcome to <span class="text-[#e51414]">Airbnb</span>
+    </h2>
+  </header>
+
+  <main class="w-full max-w-md flex flex-col gap-6 items-center">
+
+    <a href="/host/add-home" class="w-fit px-5 py-2.5 bg-[#e51414] hover:bg-[#c10d0d] text-white text-sm font-medium rounded-lg transition-colors">
+      Add Home
+    </a>
+
+    <ul class="flex flex-col gap-2">
+      <% homes.forEach(home=> { %>
+      <li class="bg-[#1c1c21] border border-white/10 text-gray-200 text-sm px-4 py-3 rounded-lg w-[40vw]">
+        <%= home.housename %>
+      </li>
+      <% }) %>
+    </ul>
+
+  </main>
+
+</body>
+
+</html>
