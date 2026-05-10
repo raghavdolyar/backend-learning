@@ -9,7 +9,13 @@ router.get('/add-home', (req, res, next) => {
 const homes = [];
 
 router.post('/add-home', (req, res, next) => {
-	homes.push({ housename: req.body.housename.trim() });
+	homes.push({
+		house: req.body.housename.trim(),
+		location: req.body.location.trim(),
+		price: req.body.price.trim(),
+		rating: req.body.rating.trim(),
+		photo: req.body.photo.trim(),
+	});
 	res.render('home-added', { pageTitle: 'airbnb home' });
 });
 

@@ -6,7 +6,6 @@ const router = express.Router();
 const { registeredHomes } = require('./hostRouter');
 
 router.get('/', (req, res, next) => {
-	console.log(registeredHomes);
 	res.render('home', { homes: registeredHomes, pageTitle: 'airbnb home' });
 });
 
