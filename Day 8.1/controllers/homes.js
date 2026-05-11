@@ -1,10 +1,12 @@
 const Home = require('../models/home');
 
 exports.getHomes = (req, res, next) => {
-	res.render('home', {
-		homes: Home.fetchAll(),
-		pageTitle: 'airbnb home',
-		currentPage: 'home',
+	Home.fetchAll(regHomes => {
+		res.render('home', {
+			homes: regHomes,
+			pageTitle: 'airbnb home',
+			currentPage: 'home',
+		});
 	});
 };
 

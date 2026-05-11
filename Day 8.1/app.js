@@ -18,11 +18,6 @@ app.set('views', 'views');
 // granting access to public folder
 app.use(express.static(path.join(rootDir, 'public')));
 
-app.use((req, res, next) => {
-	console.log(req.url, req.method);
-	next();
-});
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use(userRouter);
