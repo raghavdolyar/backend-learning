@@ -1,8 +1,8 @@
-const homes = [];
+const Home = require('../models/home');
 
 exports.getHomes = (req, res, next) => {
 	res.render('home', {
-		homes: homes,
+		homes: Home.fetchAll(),
 		pageTitle: 'airbnb home',
 		currentPage: 'home',
 	});
@@ -16,22 +16,19 @@ exports.getAddHome = (req, res, next) => {
 };
 
 exports.postAddHome = (req, res, next) => {
-	homes.push({
-		house: req.body.housename.trim(),
-		location: req.body.location.trim(),
-		price: req.body.price.trim(),
-		rating: req.body.rating.trim(),
-		photo: req.body.photo.trim(),
-	});
+	const { housename, location, price, rating, photoUrl } = req.body;
+	const home = new Home(
+		housename.trim(),
+		location.trim(),
+		price.trim(),
+		rating.trim(),
+		photoUrl.trim(),
+	);
+
+	home.save(); // saving in DB
+
 	res.render('home-added', {
 		pageTitle: 'airbnb home',
 		currentPage: 'thank you',
-	});
-};
-
-exports.notFound = (req, res, next) => {
-	res.status(404).render('404', {
-		pageTitle: '404 — Page Not Found',
-		currentPage: '404',
 	});
 };

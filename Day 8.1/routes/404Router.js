@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 // local modules
-const homesController = require('../controllers/homes');
+const errorsController = require('../controllers/errors');
 
-router.use('/', homesController.notFound);
+router.use('/', errorsController.pageNotFound);
 
 module.exports = {
 	notFoundRouter: router,
