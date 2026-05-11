@@ -24,7 +24,7 @@ module.exports = class Home {
 
 	static fetchAll(callback) {
 		const fileContent = fs.readFile(homeDBPath, (err, data) => {
-			callback(err ? [] : JSON.parse(data));
+			callback(err || !data.length ? [] : JSON.parse(data));
 		});
 	}
 };

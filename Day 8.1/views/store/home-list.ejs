@@ -1,4 +1,4 @@
-<%- include('./partials/head') %>
+<%- include('../partials/head') %>
 
 <header class="mb-8 text-center">
   <h2 class="text-4xl font-semibold text-white tracking-tight">
@@ -6,11 +6,11 @@
   </h2>
 </header>
 
-<main class="w-full flex flex-col gap-6 items-center">
+<main class="w-full flex flex-col gap-6 items-center mb-[10vh]">
 
   <div class="flex flex-wrap gap-5 justify-center w-[80vw]">
     <% homes.forEach(home => { %>
-    <%- include('./partials/card', { home }) %>
+    <%- include('../partials/user-card', { home }) %>
     <% }) %>
   </div>
 
